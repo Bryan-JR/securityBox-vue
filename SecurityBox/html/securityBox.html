@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecurityBox</title>
+    <link rel="icon" href="../img/icono.ico">
+    <link rel="stylesheet" href="../css/estilos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css">
+</head>
+<body class="colorB" onload="mensaje(`Bienvenido ${userSB}`);Datos();">
+    <header class="barra flex">
+        <a href="../index.html">
+            <h1>Security<span class="naranja">Box</span></h1>
+        </a>
+        <nav class="barraMenu flex">
+            <a href="#" class="genera" onclick="listarApp();">Administrar sitios</a>
+            <div class="imgUser" onclick="mostrarVentanaUser()">
+                <img src="../img/user.jpg" alt="user" id="iconoUser">
+            </div>
+        </nav>
+    </header>
+    <main>
+        <section class="contenedor flex">
+            <section class="SecUser">
+                <div class="imgUser" onclick="mostrarVentanaUser()">
+                    <img src="../img/user.jpg" alt="user" id="iconoUser">
+                </div>
+            </section>
+            <section class="agregarDatos" id="datos">
+                <form action="" class="formularioAgrega flex" id="formDatos">
+                    <h2>Guarda tus contraseñas:</h2>
+                    <div>
+                        <label for="sitio">Sitio:</label>
+                        <select name="sitio" id="sitio" class="inputs" oninput="setNuevoApp();">
+                        </select>
+                    </div>
+                    <div>
+                        <label for="user">Correo o Usuario:</label>
+                        <input type="text" id="user" class="inputs" name="user">
+                    </div>
+                    <div>
+                        <label for="pass">Contraseña:</label>
+                        <input type="password" id="pass" class="inputs" name="pass">
+                    </div>
+                    <div>
+                        <a id="guardarUser" class="btn" href="#" onclick="setGuardarCuenta();">Guardar</a>
+                    </div>
+                </form>
+            </section>
+            <section class="contenedorTabla flex">
+                <div class="barraUser flex">
+                    <h2 id="ident">Usuario01</h2>
+                    <form action="" id="Fbusqueda">
+                        <select  placeholder="Escribe sitio..." id="busca" oninput="buscar();">
+                        </select>
+                        <button id="lupa"><i class="bi bi-search"></i></button>
+                    </form>
+                </div>
+                    <table class="tabla" id="tabla">
+                        <thead>
+                            <tr>
+                                <th>Sitio</th>
+                                <th>Correo / Usuario</th>
+                                <th>Contraseña</th>
+                                <th class="opt"></th>
+                        </tr>
+                        </thead>
+                        <tbody id="bodyTabla">
+
+                        </tbody>
+                    </table>
+            </section>
+            
+            <section class="botonesA">
+                <a href="#" class="btn" onclick="listarApp();">Administrar sitios</a>
+            </section>
+        </section>
+        <section class="ventanaCambio down" id="ventanaCambiar">
+            <form class="formatoCambiar" action="#">
+                <a href="#" class="salirInicio" onclick="cierraLista();"><i class="bi bi-x-lg"></i></a>
+                    <h2>Actualizar</h2>
+                    <div>
+                        <select name="sitioCambiar" id="sitioCambiar" class="inputs" oninput="setNuevoApp();">
+                        </select>
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Correo o usuario" id="userCambiar" class="inputs" name="user">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Contraseña" id="passCambiar" class="inputs" name="pass">
+                    </div>
+                    <div>
+                        <a id="aceptarCambio" class="btn" href="#" onclick="actualizarCuenta();">Aceptar</a>
+                    </div>
+            </form>
+        </section>
+        <section class="ventanaCambio down" id="ventanaUser">
+            <form class="formatoCambiarUser" action="#">
+                <a href="#" class="salirInicio" id="salirUser" onclick="cierraLista();"><i class="bi bi-x-lg"></i></a>
+                <h3>Actualización de datos</h3>
+                <div class="sesionCliente">
+                        <label for="nombreCambio">Nombre:</label>
+                        <input type="text" id="nombreCambio" class="inputs" name="nombre">
+                    
+                        <label for="apellidoCambio">Apellido:</label>
+                        <input type="text" id="apellidoCambio" class="inputs" name="apellido">
+                   
+                        <label for="documentosCambio">Tipo de documento:</label>
+                        <select name="documentos" id="documentosCambio" class="inputs">
+                            <option value="TI">Tarjeta de identidad</option>
+                            <option value="CC">Cedula de ciudadania</option>
+                            <option value="CE">Cedula Extragera</option>
+                        </select>
+                        <input type="number" id="nDocumentoCambio" class="inputs" name="nDocumento" placeholder="Número de documento">
+                    
+                        <label>Fecha de Nacimiento:</label>
+                        <input type="date" class="inputs" name="fecha" id="fechaCambio" value="fecha">
+                    
+                </div>    
+                <div class="sesionCuenta">
+                    <label for="genero">Genero:</label>
+                    <input type="text" id="generoCambio" class="inputs" name="genero">
+                    <label for="correo">Correo:</label>
+                    <input type="email" id="correoUserCambio" class="inputs" name="correo">
+                    <label for="contraseña">Contraseña:</label>
+                    <input type="password" id="contraseñaUserCambio" class="inputs" name="contraseña"">
+                    <label for="usuario">Nombre usuario:</label>
+                    <input type="text" id="usuarioUserCambio" class="inputs" name="usuario">
+                    
+                </div>
+                <div class="contenedorBtn">
+                    <a id="aceptarCambioCuenta" class="btnCambio" href="#" onclick="getCambiosCuentaSB();">Aceptar cambios</a>
+                    <a id="eliminarCuenta" class="btnEliminar" href="#" onclick="getEliminarCuentaSB()">Eliminar cuenta</a>
+                </div>
+            </form>
+        </section>
+        <section class="OtrosSitios down" id="OtrosSitio">
+                <form class="NuevoSitio" action="#">
+                    <a href="#" class="salirInicio" onclick="cierraLista();"><i class="bi bi-x-lg"></i></a>
+                    <h2>Agregar otro sitio</h2>
+                    <div>
+                        <input type="text" placeholder="Nombre del Sitio"  id="NombreSitio" class="inputs" name="NombreSitio">
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Url del Sitio" id="nuevoUrl" class="inputs" name="user">
+                    </div>
+                    <div>
+                        <a class="btn" href="#" onclick="getGuardarApp();">Aceptar</a>
+                    </div>
+                </form>
+            </section>
+            <section class="OtrosSitios down" id="ListaApp">
+                <div id="Apps" class="NuevoSitio" action="#">
+                </div>
+            </section>
+        <section class="msgComprobar moverDer down" id="msgEstado">
+            ...
+        </section>
+    </main>
+    <script src="../js/app.js"></script>
+    <footer>
+        <a name="contacto"></a>
+        <section class="info" >
+
+        <section class="Security">
+            <h2 class=""> <b>Security<span class="naranja">Box</b></h2>
+                <p>Manten seguras tus contraseñas y a la mano</p>
+        </section>       
+
+        <section class="red">
+            <h3 class="titulofooter">Redes sociales</h3>
+            <div class="redes container">
+            <ul>
+                <li><a href="#" class="facebook"><i class="bi bi-facebook"></i></a></li>
+                <li><a href="#" class="twitter"><i class="bi bi-twitter"></i></a></li>
+                <li><a href="#" class="whatsapp"><i class="bi bi-whatsapp"></i></a></li>
+            </ul>
+            </div>
+        </section>
+        </section>
+        <section>
+            <h6>Trabajo Universidad de Córdoba - Desarrollo Web 1</h6>
+        </section>
+    </footer>
+</body>
+</html>
